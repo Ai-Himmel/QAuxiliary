@@ -64,6 +64,7 @@ object TransactionHelper {
 
     @JvmStatic
     fun getUserStatus(uin: Long): Int {
+        return UserStatusConst.whitelisted
         return try {
             val url = URL("$apiAddress/user/query")
             val conn = url.openConnection() as HttpsURLConnection
@@ -176,6 +177,7 @@ object TransactionHelper {
      */
     private fun requestSyncCardMsgHistory(items: List<CardMsgSendRecord>) {
         // if not syncing, start a new sync
+        return
         if (!sIsSyncThreadRunning.compareAndSet(false, true)) {
             return
         }
